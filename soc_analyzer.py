@@ -44,7 +44,39 @@ def listar_ips_unicos(lista_eventos):
     return sorted(ips)
 
 def gerar_relatorio(lista_eventos):
-    pass
+    print("=== MINI SOC ANALYZER ===")
+    print()
+    print(f"Total de eventos analisados: {len(lista_eventos)}")
+    print()
+
+    resumo = contar_eventos(lista_eventos)
+    print("Resumo por tipo:")
+    for tipo in sorted(resumo.keys()):
+        print(f"{tipo}: {resumo[tipo]}")
+    print()
+
+    ips = listar_ips_unicos(lista_eventos)
+    print("IPs únicos monitorados:")
+    for ip in ips:
+        print(ip)
+    print()
+
+    brute = identificar_bruteforce(lista_eventos)
+    print("Possível brute force:")
+    if brute:
+        for ip in brute:
+            print(ip)
+    else:
+        print("Nenhum")
+    print()
+
+    scanner = identificar_scanners(lista_eventos)
+    print("Possível scanner:")
+    if scanner:
+        for ip in scanner:
+            print(ip)
+    else:
+        print("Nenhum")
 
 if __name__ == "__main__":
     gerar_relatorio(eventos)
