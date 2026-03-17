@@ -38,7 +38,10 @@ def identificar_scanners(lista_eventos):
     return suspeitos
 
 def listar_ips_unicos(lista_eventos):
-    pass
+    ips = set()
+    for evento in lista_eventos:
+        ips.add(evento["ip"])
+    return sorted(ips)
 
 def gerar_relatorio(lista_eventos):
     pass
