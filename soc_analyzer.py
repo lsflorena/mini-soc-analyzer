@@ -20,7 +20,13 @@ def contar_eventos(lista_eventos):
     return contagem
 
 def identificar_bruteforce(lista_eventos):
-    pass
+    falhas_por_ip = {}
+    for evento in lista_eventos:
+        if evento["evento"] == "login_falha":
+            ip = evento["ip"]
+            falhas_por_ip[ip] = falhas_por_ip.get(ip, 0) + 1
+    suspeitos = [ip for ip, qtd in falhas_por_ip.items() if qtd >= 3]
+    return suspeitos
 
 def identificar_scanners(lista_eventos):
     pass
